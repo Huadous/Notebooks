@@ -1,0 +1,98 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[default,regular,black]{sourceserifpro}
+\usepackage{xcolor}
+\definecolor{StanfordRed}{RGB}{140, 21, 21}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{tcolorbox}
+\usepackage{framed}
+
+\makeatletter
+\renewcommand{\boxed}[1]{\text{\fboxsep=.2em\fbox{\m@th$\displaystyle#1$}}}
+\makeatother
+
+\definecolor{lightgray}{rgb}{0.75,0.75,0.75}
+ 
+\newenvironment{lightgrayleftbar}{%
+  \def\FrameCommand{\textcolor{lightgray}{\vrule width 3pt} \hspace{3pt}}%
+  \MakeFramed {\advance\hsize-\width \FrameRestore}}%
+{\endMakeFramed}
+
+\title{Compiler}
+\author{Simon Hua}
+\date{June 2021}
+
+\begin{document}
+    \maketitle
+    \vspace*{\fill}
+        \centering
+        {
+            \normalfont
+            \textcolor{StanfordRed}{Stanford} | Online
+        }
+        by Alex Aiken
+
+        \LaTeX{}
+        \thispagestyle{empty}
+    \newpage
+    \clearpage
+    \pagenumbering{arabic}
+    \begin{abstract}
+        This a note for Stanford Online course named Compiler. I'd like to share my note with you guys.
+        After three months of intership. I find the importance of Compiler when you meet any problem strange.
+        Thus, learning makes me feeling better.
+    \end{abstract}
+
+    \section{\normalsize{Week 1: Introduction \& the Cool Programming Language}}
+    \subsection{Introduction}
+    \begin{itemize}
+        \item Compilers
+            \begin{center}
+                \begin{tabular}{c c c c c}
+                    & & off-line & & \\
+                    & & & & Data \\
+                    & & & & \(\downarrow\) \\
+                    program & \(\longrightarrow\) & \(\boxed{C}\) & \(\longrightarrow\) & exec \\
+                    & & & & \(\downarrow\) \\
+                    & & & & Output \\
+                \end{tabular}
+            \end{center}
+            \begin{lightgrayleftbar}
+                1954 IBM develops the 704 \\
+                software > hardware \\
+                "Speedcoding"
+                \begin{itemize}
+                    \item 10-20x slower
+                    \item 300 bytes = 30\% memory
+                \end{itemize}
+            \end{lightgrayleftbar}
+
+        \item Interpreters
+            \begin{center}
+                \begin{tabular}{c c c c c}
+                    & & on-line & & \\
+                    program & \(\longrightarrow\) & & & \\
+                    & & \(\boxed{I}\) & \(\longrightarrow\) & Output \\
+                    Data & \(\longrightarrow\) & & & \\
+                \end{tabular}
+            \end{center}
+            \begin{lightgrayleftbar}\noindent
+                FORTRAN 1(Formulas Translated) \\
+                1954-1957 \\
+                1958 50\% program in FORTRAN 1
+                
+            \end{lightgrayleftbar}
+    \end{itemize}
+
+    The outlines of FORTRAN 1
+    \begin{enumerate}
+        \item Lexical Analysis
+        \item Parsing
+        \item Sematic Analysis
+        \item Optimization
+        \item Code Generation
+    \end{enumerate}
+
+\end{document}inputenc
