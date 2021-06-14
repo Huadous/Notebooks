@@ -1,4 +1,13 @@
-\documentclass[12pt, a4paper]{article}
+% \RequirePackage{filecontents}
+% \begin{filecontents*}{\jobname.mst}
+% 	delim_0 "\\IndexDotfill "
+% 	delim_1 "\\IndexDotfill "
+% 	headings_flag 1
+% 	heading_prefix "  \\IndexHeading{"
+% 		heading_suffix "}\n"
+% \end{filecontents*}
+
+\documentclass[12pt,titlepage]{report}
 \usepackage[default,regular,black]{sourceserifpro}
 \usepackage{xcolor}
 \definecolor{StanfordRed}{RGB}{140, 21, 21}
@@ -8,6 +17,35 @@
 \usepackage{amsmath}
 \usepackage{tcolorbox}
 \usepackage{framed}
+\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm]{geometry}
+\usepackage[raggedleft]{titlesec}
+\usepackage{fancyhdr}
+\usepackage{eco}
+\usepackage[hidelinks]{hyperref}
+\usepackage{bookmark}
+\usepackage[ruled,linesnumbered]{algorithm2e}
+
+\renewcommand{\thesection}{{\oldstylenums{\arabic{section}}}}
+\renewcommand{\thesubsection}{{\oldstylenums{\arabic{section}.\arabic{subsection}}}}
+
+\titleformat{\chapter}[block]{\raggedright\LARGE}{\thesection}{1em}{}
+\titleformat{\section}[block]{\raggedright\LARGE}{\thesection}{1em}{}
+\titleformat{\subsection}[block]{\raggedright\large}{\thesubsection}{1em}{}
+\titleformat*{\subsubsection}{\large}
+\titleformat*{\paragraph}{\large}
+\titleformat*{\subparagraph}{\large}
+
+\fancypagestyle{appendixFancy}{
+    \fancyhf{}
+    \renewcommand\headrulewidth{.1pt}
+    \renewcommand\footrulewidth{.1pt}
+    \fancyhead[L]{\leftmark}
+    \fancyhead[C]{Simon Hua}
+    \fancyhead[R]{\thepage}
+    \fancyfoot[C]{\textcolor{StanfordRed}{Stanford} | Online by Alex Aiken}
+}
+
+\pagestyle{appendixFancy}
 
 \makeatletter
 \renewcommand{\boxed}[1]{\text{\fboxsep=.2em\fbox{\m@th$\displaystyle#1$}}}
@@ -20,33 +58,38 @@
   \MakeFramed {\advance\hsize-\width \FrameRestore}}%
 {\endMakeFramed}
 
-\title{Compiler}
+\title{Compilers}
 \author{Simon Hua}
 \date{June 2021}
 
 \begin{document}
+    % \maketitle
+    %     \centering
+    %     {
+    %         \normalfont
+    %         \textcolor{StanfordRed}{Stanford} | Online
+    %     }
+    %     by Alex Aiken
+
+    %     \LaTeX{}
+    %     \thispagestyle{empty}
+    % \newpage
+    % \clearpage
+    % \pagenumbering{arabic}
+    % % \begin{abstract}
+    % %     This a note for Stanford Online course named Compiler. I'd like to share my note with you guys.
+    % %     After three months of intership. I find the importance of Compiler when we meet any problem strange.
+    % %     Thus, learning makes me feeling better.
+    % % \end{abstract}
+    % \tableofcontents
     \maketitle
-    \vspace*{\fill}
-        \centering
-        {
-            \normalfont
-            \textcolor{StanfordRed}{Stanford} | Online
-        }
-        by Alex Aiken
-
-        \LaTeX{}
-        \thispagestyle{empty}
+    {
+        \hypersetup{linkbordercolor=white}
+        \tableofcontents
+    }
     \newpage
-    \clearpage
-    \pagenumbering{arabic}
-    \begin{abstract}
-        This a note for Stanford Online course named Compiler. I'd like to share my note with you guys.
-        After three months of intership. I find the importance of Compiler when you meet any problem strange.
-        Thus, learning makes me feeling better.
-    \end{abstract}
-
-    \section{\normalsize{Week 1: Introduction \& the Cool Programming Language}}
-    \subsection{Introduction}
+    \chapter{\textcolor{StanfordRed}{Introduction}}
+    \section{\textcolor{StanfordRed}{Introduction}}
     \begin{itemize}
         \item Compilers
             \begin{center}
@@ -86,13 +129,78 @@
             \end{lightgrayleftbar}
     \end{itemize}
 
-    The outlines of FORTRAN 1
+    \section{\textcolor{StanfordRed}{Structure of Compiler}}
+    5 phases
     \begin{enumerate}
-        \item Lexical Analysis
-        \item Parsing
-        \item Sematic Analysis
-        \item Optimization
-        \item Code Generation
+        \item \textcolor{StanfordRed}{Lexical Analysis}: divides program text into "words" or "tokens".
+        \item \textcolor{StanfordRed}{Parsing}: diagramming sentences.
+        \item \textcolor{StanfordRed}{Semantic Analysis}: try to understand "meaning". (hard)\\
+        Compilers perform limited senmantic analysis to catch inconsistencies.\\
+        \(\rightarrow\) Programming Languages define strict rules to avoid such ambiguities.
+        \item \textcolor{StanfordRed}{Optimization}: Antomatically modify prgrams so that they
+        
+        \(\rightarrow\) Run faster
+
+        \(\rightarrow\) Use less space
+
+        \(\rightarrow\) Reduce power consumption...
+
+        \item \textcolor{StanfordRed}{Code Generation(Code Gen)}
+        
+        \(\rightarrow\) Produces assembly code.(usually)
+
+        \(\rightarrow\) A translation int another language.(Analgous to human translation)
+
+    \end{enumerate}
+    \begin{flushleft}
+        FORTRAN 1: \(\boxed{\quad\quad L \quad\quad}\quad\boxed{\quad\quad P \quad\quad}\quad\boxed{S}\quad\boxed{\quad\quad O \quad\quad}\quad\boxed{\quad\quad CG \quad\quad}\)\\
+        \hspace*{\fill} \\
+        \quad MODERN: \(\boxed{ L }\quad\boxed{ P }\quad\boxed{\quad\quad S\quad\quad}\quad\boxed{\quad\quad\quad\quad\quad\quad O \quad\quad\quad\quad\quad\quad}\quad\boxed{ CG }\)\\
+    \end{flushleft}
+    
+    \section{\textcolor{StanfordRed}{The Economy of Programming Languages}}
+    \begin{flushleft}
+        \textcolor{StanfordRed}{Question}
+    \end{flushleft}
+    \begin{enumerate}
+        \item Why are there so many Programming Languages?
+        
+        \textcolor{StanfordRed}{Application domians have distinctive / conflicting needs}.
+
+        \begin{flushleft}
+            \begin{tabular}{ l l l l l }
+                & & \(\rightarrow\) Good Float Points & & \\
+                Scientific Computing & \quad\quad\quad & \(\rightarrow\) Good Arrays & \quad\quad\quad & FORTRAN \\
+                & & \(\rightarrow\) Parallelism & & \\
+                \\ \hspace*{\fill} \\
+                & & \(\rightarrow\) Persistence & & \\
+                Business Application & & \(\rightarrow\) Report Generation & & SQL \\
+                & & \(\rightarrow\) Data Analysis & & \\
+                \\ \hspace*{\fill} \\
+                & & \(\rightarrow\) Control of Resources & & \\
+                Scientific Computing & & & & C/C++ \\
+                & & \(\rightarrow\) Real TimeConstraints & & \\
+            \end{tabular}
+        \end{flushleft}
+        \item Why are there new programming languages?
+        
+        \textcolor{StanfordRed}{Claim: \textbf{Programmer training} is the dominant cost for a Programming Languages}
+
+        \begin{enumerate}
+            \item widely-used Languages are slow to change.
+            \item Easy to start a new language. \(\longrightarrow\) Productivity > Training Cost
+            \item Languages adopted to fill a void.
+        \end{enumerate}
+        \begin{flushleft}
+            New languages tend to looks like old languages because of the Claim\\
+            \(\rightarrow\) Reducing programming training, like Java vs C++.
+        \end{flushleft}
+        \item What is a good programming languages?\\
+        \textcolor{StanfordRed}{There is no universally accepted metric for language design. }
     \end{enumerate}
 
+    \newpage
+    \chapter{}{\textcolor{StanfordRed}{The Cool Programming Language}}
+    \section{\textcolor{StanfordRed}{Cool Overview}}
+    
 \end{document}inputenc
