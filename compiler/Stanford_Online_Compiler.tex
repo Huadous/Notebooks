@@ -1,4 +1,4 @@
-\documentclass{report}
+\documentclass[11pt]{report}
 \usepackage[default,regular,black]{sourceserifpro}
 \usepackage{xcolor}
 \usepackage[T1]{fontenc}
@@ -20,9 +20,15 @@
 \usepackage{calligra}
 \usepackage{amsthm}
 \usepackage{calc}
+\usepackage{listings}
+\usepackage{lstautogobble}  % Fix relative indenting
 
 
 \definecolor{stanfordred}{RGB}{140, 21, 21}
+\definecolor{bluekeywords}{rgb}{0.13, 0.13, 1}
+\definecolor{greencomments}{rgb}{0, 0.5, 0}
+\definecolor{redstrings}{rgb}{0.9, 0, 0}
+\definecolor{graynumbers}{rgb}{0.5, 0.5, 0.5}
 
 \titleformat{\chapter}[display]{\raggedleft\huge\color{stanfordred}\bfseries}{CHAPTER \Huge\textcolor{black}{\oldstylenums{\thechapter}}}{3em}{}{}
 \titleformat{\section}[block]{\raggedright\huge\color{stanfordred}}{\huge\color{black}{\oldstylenums{\thesection}}}{1em}{}
@@ -49,6 +55,26 @@
 }
 \pagestyle{StanfordOnline}
 
+\lstset{
+    autogobble,
+    columns=fullflexible,
+    showspaces=false,
+    showtabs=false,
+    breaklines=true,
+    showstringspaces=false,
+    breakatwhitespace=true,
+    escapeinside={(*@}{@*)},
+    commentstyle=\color{greencomments},
+    keywordstyle=\color{bluekeywords},
+    stringstyle=\color{redstrings},
+    numberstyle=\color{graynumbers},
+    basicstyle=\ttfamily\footnotesize,
+    frame=l,
+    framesep=12pt,
+    xleftmargin=12pt,
+    tabsize=4,
+    captionpos=b
+}
 \renewcommand{\labelitemi}{\(\bullet\)}
 
 % \makeatletter
@@ -250,5 +276,69 @@
     \newpage
     \chapter{The Cool Programming Language}
     \section{Cool Overview}
+    \textcolor{stanfordred}{COOL} (Classroom Object Oriented Language) \\
+    Designed to be implemented in a short time and small enough for a one term project. \\
+    Cool \(\longrightarrow\) MIPS(spim) \(\longrightarrow\) Assembly Language
+    \section{Cool Examples}
+    \begin{enumerate}
+        \item example 1
+        \begin{lstlisting}
+        class Main inherits IO {
+            main() : Object {
+                out_string("Hello, world!\n")
+            };
+        };
+        \end{lstlisting}
+        \item  exmaple 2
+        \begin{lstlisting}
+            class Main inherits IO {
+                main(): Object {{
+                    out_string("Enter an integer greater-than or equal-to 0: ");
+              
+                    let input: Int <- in_int() in
+                        if input < 0 then
+                            out_string("ERROR: Number must be greater-than or equal-to 0\n")
+                        else {
+                            out_string("The factorial of ").out_int(input);
+                            out_string(" is ").out_int(factorial(input));
+                            out_string("\n");
+                        }
+                        fi;
+                }};
+              
+                factorial(num: Int): Int {
+                  if num = 0 then 1 else num * factorial(num - 1) fi
+                };
+            };
+        \end{lstlisting}
+    \end{enumerate}    
+
+    \newpage
+    \chapter{Lexical Analysis}
+    \section{Lexical Analysis Part 1}
+    \textcolor{stanfordred}{Token class}\\
+    Token classes correspond to sets of strings. Classify program substrings  according to role(token class).
+    \begin{itemize}
+        \item \textcolor{stanfordred}{Identifier}: strings of letters or digits, starting with a letter.
+        \item \textcolor{stanfordred}{Integer/Number}: a non-empty string of digits.
+        \item \textcolor{stanfordred}{Keyword}: "else" or "if" or "begin" or \dots
+        \item \textcolor{stanfordred}{Whitespace}: a non-empty sequence of blanks, newlines, and tabs.
+        \item \textcolor{stanfordred}{Operater}: like "==", "<" or ">" in cpp.
+        \item \textcolor{stanfordred}{single character token(punctuatin mark)}: "(", ")", ";", "=".
+    \end{itemize}
+    \textcolor{stanfordred}{Communicate tokens to the parser} \\
+    \begin{center}
+        \begin{tabular}{c c c c c}
+            string & \(\longrightarrow\) & \Ovalbox{LA} & \(\longrightarrow\) & \Ovalbox{P}\\
+            \(\text{foo = 42}\) & & & \(\underbrace{\langle\text{class, string}\rangle}_{token}\) & \\     
+        \end{tabular}
+    \end{center}
+    For exmaple:
+    \begin{center}
+        \(\langle\text{Id, "foo"}\rangle\)\quad\(\langle\text{Op, "="}\rangle\)\quad\(\langle\text{Int, "42"}\rangle\)
+    \end{center}
+    
+
+
     
 \end{document}
