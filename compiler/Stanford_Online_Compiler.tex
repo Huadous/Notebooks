@@ -316,8 +316,10 @@
     \newpage
     \chapter{Lexical Analysis}
     \section{Lexical Analysis Part 1}
-    \textcolor{stanfordred}{Token class}\\
-    Token classes correspond to sets of strings. Classify program substrings  according to role(token class).
+    \textcolor{stanfordred}{Token class}
+
+    Token classes correspond to sets of strings.
+
     \begin{itemize}
         \item \textcolor{stanfordred}{Identifier}: strings of letters or digits, starting with a letter.
         \item \textcolor{stanfordred}{Integer/Number}: a non-empty string of digits.
@@ -326,7 +328,11 @@
         \item \textcolor{stanfordred}{Operater}: like "==", "<" or ">" in cpp.
         \item \textcolor{stanfordred}{single character token(punctuatin mark)}: "(", ")", ";", "=".
     \end{itemize}
-    \textcolor{stanfordred}{Communicate tokens to the parser} \\
+
+    Classify program substrings  according to role(token class).
+    
+    \textcolor{stanfordred}{Communicate tokens to the parser} 
+
     \begin{center}
         \begin{tabular}{c c c c c}
             string & \(\longrightarrow\) & \Ovalbox{LA} & \(\longrightarrow\) & \Ovalbox{P}\\
@@ -340,9 +346,11 @@
     \begin{cell}
         An implementation must do two things
         \begin{enumerate}
-            \item Recognize substrings corresponding to tokens \\
+            \item Recognize substrings corresponding to tokens
+            
             \(\rightarrow\) The lexemes
-            \item Identify the token class of each lexeme \\
+            \item Identify the token class of each lexeme 
+            
             \begin{center}
                 \(\underbrace{\langle \text{token class, lexeme}\rangle}_{\text{token}}\)
             \end{center}
