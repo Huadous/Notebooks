@@ -337,7 +337,17 @@
     \begin{center}
         \(\langle\text{Id, "foo"}\rangle\)\quad\(\langle\text{Op, "="}\rangle\)\quad\(\langle\text{Int, "42"}\rangle\)
     \end{center}
-    
+    \begin{cell}
+        An implementation must do two things
+        \begin{enumerate}
+            \item Recognize substrings corresponding to tokens \\
+            \(\rightarrow\) The lexemes
+            \item Identify the token class of each lexeme \\
+            \begin{center}
+                \(\underbrace{\langle \text{token class, lexeme}\rangle}_{\text{token}}\)
+            \end{center}
+        \end{enumerate}
+    \end{cell}
 
 
     

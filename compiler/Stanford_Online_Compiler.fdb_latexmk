@@ -1,7 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1623736621 "/Users/huayu/Documents/huadous/Notebooks/compiler/Stanford_Online_Compiler.tex" "/Users/huayu/Documents/huadous/Notebooks/compiler/Stanford_Online_Compiler.pdf" "Stanford_Online_Compiler" 1623736663
-  "/Users/huayu/Documents/huadous/Notebooks/compiler/Stanford_Online_Compiler.aux" 1623736622 4777 9ca7a53d79f569209f940cc856e7c378 ""
-  "/Users/huayu/Documents/huadous/Notebooks/compiler/Stanford_Online_Compiler.tex" 1623736662 12740 be4ec04346ee7031bbd5c528dd0cbb85 ""
+["pdflatex"] 1623819846 "/Users/huayu/Documents/huadous/Notebooks/compiler/Stanford_Online_Compiler.tex" "/Users/huayu/Documents/huadous/Notebooks/compiler/Stanford_Online_Compiler.pdf" "Stanford_Online_Compiler" 1623819967
+  "/Users/huayu/Documents/huadous/Notebooks/compiler/Stanford_Online_Compiler.aux" 1623819847 4777 9ca7a53d79f569209f940cc856e7c378 ""
+  "/Users/huayu/Documents/huadous/Notebooks/compiler/Stanford_Online_Compiler.tex" 1623819967 13171 0884b5335c0a7142b32ab5ecbbb025db ""
   "/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/sourceserifpro/a_3wqk3b.enc" 1536266730 3011 dbfcafe7d2c9e59b89e8657816ea69d6 ""
@@ -234,13 +234,13 @@
   "/usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1616695603 5169178 a2ce6e2d73f603b690db6777d06dbccb ""
   "/usr/local/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt" 1623568776 2724743 d00500ef066e04bd87742a138fcfac17 ""
   "/usr/local/texlive/2021/texmf.cnf" 1616695596 577 4c1911a7228e554c6032256d3cf5567d ""
-  "Stanford_Online_Compiler.aux" 1623736622 4777 9ca7a53d79f569209f940cc856e7c378 "pdflatex"
-  "Stanford_Online_Compiler.tex" 1623736662 12740 be4ec04346ee7031bbd5c528dd0cbb85 ""
-  "Stanford_Online_Compiler.toc" 1623736622 771 6b7203cd9a40b3edc33e102db80ce6e0 "pdflatex"
+  "Stanford_Online_Compiler.aux" 1623819847 4777 9ca7a53d79f569209f940cc856e7c378 "pdflatex"
+  "Stanford_Online_Compiler.tex" 1623819967 13171 0884b5335c0a7142b32ab5ecbbb025db ""
+  "Stanford_Online_Compiler.toc" 1623819847 771 6b7203cd9a40b3edc33e102db80ce6e0 "pdflatex"
   (generated)
-  "/Users/huayu/Documents/huadous/Notebooks/compiler/Stanford_Online_Compiler.pdf"
-  "Stanford_Online_Compiler.log"
+  "Stanford_Online_Compiler.pdf"
   "Stanford_Online_Compiler.aux"
   "/Users/huayu/Documents/huadous/Notebooks/compiler/Stanford_Online_Compiler.log"
+  "/Users/huayu/Documents/huadous/Notebooks/compiler/Stanford_Online_Compiler.pdf"
+  "Stanford_Online_Compiler.log"
   "Stanford_Online_Compiler.toc"
-  "Stanford_Online_Compiler.pdf"
