@@ -1,6 +1,7 @@
 \documentclass[11pt]{report}
 \usepackage[default,regular,black]{sourceserifpro}
 \usepackage{xcolor}
+\usepackage{soul}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
@@ -29,6 +30,7 @@
 \definecolor{greencomments}{rgb}{0, 0.5, 0}
 \definecolor{redstrings}{rgb}{0.9, 0, 0}
 \definecolor{graynumbers}{rgb}{0.5, 0.5, 0.5}
+\definecolor{codecell}{HTML}{f1f3f4}
 
 \titleformat{\chapter}[display]{\raggedleft\huge\color{stanfordred}\bfseries}{CHAPTER \Huge\textcolor{black}{\oldstylenums{\thechapter}}}{3em}{}{}
 \titleformat{\section}[block]{\raggedright\huge\color{stanfordred}}{\huge\color{black}{\oldstylenums{\thesection}}}{1em}{}
@@ -76,10 +78,6 @@
     captionpos=b
 }
 \renewcommand{\labelitemi}{\(\bullet\)}
-
-% \makeatletter
-% \renewcommand{\Ovalbox}[1]{\text{\Ovalboxsep=.2em\Ovalbox{\m@th$\displaystyle#1$}}}
-% \makeatother
 
 \newenvironment{cell}{%
 	% {\calligra Proof:}
@@ -134,6 +132,21 @@
     {Simon Hua}} % Publisher name
 
 \end{titlepage}}
+
+% \usepackage{tikz}
+
+% \newcommand\codecell[1]{\begin{tikzpicture}
+%     \node [fill=codecell, rounded corners=5pt, anchor=south] {\footnotesize{#1}};
+% \end{tikzpicture}}
+
+\lstdefinestyle{codecell}{
+    basicstyle=\footnotesize,
+    backgroundcolor=codecell,
+    breaklines=true,
+    tabsize=4,
+}
+\newcommand{\codecell}[1] {\colorbox{codecell}{\parbox{\widthof{#1}}{#1}}}
+% \newcommand\codecell[1]{\colorbox{codecell}{\parbox[t]{\widthof{\footnotesize{#1}}}{\lstinline[style=codecell,mathescape]`#1`}}}
 
 \begin{document}
     % \maketitle
@@ -315,7 +328,7 @@
 
     \newpage
     \chapter{Lexical Analysis}
-    \section{Lexical Analysis Part 1}
+    \section{Lexical Analysis}
     \textcolor{stanfordred}{Token class}
 
     Token classes correspond to sets of strings.
@@ -330,7 +343,7 @@
     \end{itemize}
 
     Classify program substrings  according to role(token class).
-    
+    \\ \vspace*{\fill} \\
     \textcolor{stanfordred}{Communicate tokens to the parser} 
 
     \begin{center}
@@ -356,6 +369,56 @@
             \end{center}
         \end{enumerate}
     \end{cell}
+    \section{Lexical Analysis Examples}
+    \begin{enumerate}
+        \item \textcolor{stanfordred}{FORTRAN rule: white space is insignificant.}
+        \begin{enumerate}
+            \item \codecell{VAR1} is the same as \codecell{VA R1}.
+            \item \codecell{DO 5 I = 1,25}
+            
+            This is a loop and \codecell{I} is a variable from 1 t 25. The number 5 means execute the following 5 lines of the codes in the loop.
+
+            \item \codecell{DO 5 I = 1.25}
+            
+            It's exactly the same as \codecell{DO5I = 1.25}.
+        \end{enumerate}
+        \begin{cell}
+            \begin{enumerate}
+                \item The goal is to partion the string. This is implemented by reading left-to-right, recognizing ne token at a time.
+                \item "Lookahead" may be required to decided where one token ends and the next tken begins. 
+            \end{enumerate}
+        \end{cell}
+        \item \textcolor{stanfordred}{PL/1(Programming langugae 1) keywords are not reserved }
+        \begin{enumerate}
+            % \item \codecell{\textcolor{stanfordred}{IF} ELSE \textcolor{stanfordred}{THEN} THEN = ELSE; \textcolor{stanfordred}{ELSE} ELSE = THEN;}
+            \item \codecell{DECLARE(ARG 1, ..., ARG N)}
+            
+            Is \codecell{DECLARE} is a keyword or an array reference? Unbounded lookahead.
+        \end{enumerate}
+
+        \item \begin{itemize}
+            \item C++ template syntax \\
+                \codecell{Foo<Bar>}
+
+            \item C++ template syntax \\
+                \codecell{cin >{}> var;}
+        \end{itemize}
+        \codecell{Foo<Bar<Bazz>{}>} \\ 
+        The Problem is how the compiler will deal with the code \codecell{>{}>}.
+    \end{enumerate}
+    
+\begin{cell}
+    \textcolor{stanfordred}{Summary} 
+
+    \begin{itemize}
+        \item The goal of lexical analysis is to
+        \begin{enumerate}
+            \item Partition the input string into lexemes.
+            \item Identify the token of each lexeme.
+        \end{enumerate}
+        \item Left-to-right scan \(\Rightarrow\) lookahead sometimes required.
+    \end{itemize}
+\end{cell}
 
 
     
