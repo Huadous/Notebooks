@@ -23,6 +23,9 @@
 \usepackage{calc}
 \usepackage{listings}
 \usepackage{lstautogobble}  % Fix relative indenting
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
 
 
 \definecolor{stanfordred}{RGB}{140, 21, 21}
@@ -139,13 +142,25 @@
 %     \node [fill=codecell, rounded corners=5pt, anchor=south] {\footnotesize{#1}};
 % \end{tikzpicture}}
 
-\lstdefinestyle{codecell}{
-    basicstyle=\footnotesize,
-    backgroundcolor=codecell,
-    breaklines=true,
-    tabsize=4,
-}
+% \lstdefinestyle{codecell}{
+%     basicstyle=\footnotesize,
+%     backgroundcolor=codecell,
+%     breaklines=true,
+%     tabsize=4,
+%     upquote=true
+% }
 \newcommand{\codecell}[1] {\colorbox{codecell}{\parbox{\widthof{#1}}{#1}}}
+
+% \def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
+
+\lstdefinestyle{code}{
+    basicstyle=\fontfamily{cmtt}\selectfont,
+    upquote=true,
+    tabsize=4,
+    frame=none,
+    mathescape=true
+}
+\lstnewenvironment{code}{\lstset{style=code}}{}
 % \newcommand\codecell[1]{\colorbox{codecell}{\parbox[t]{\widthof{\footnotesize{#1}}}{\lstinline[style=codecell,mathescape]`#1`}}}
 
 \begin{document}
@@ -420,6 +435,79 @@
     \end{itemize}
 \end{cell}
 
+\section{Regular Languages}
+The \textcolor{stanfordred}{Lexical structure} equals to \textcolor{stanfordred}{token class}.
+We must say what set of strings is in a token class\\
+\(\rightarrow\) Use regular languages. Then, we need to define the regular expression.
 
-    
+\begin{cell}
+    \textcolor{stanfordred}{Define.} Regular Expression
+    \begin{itemize}
+        \item Single Character
+        \begin{code}
+            'c' = {"c"}
+        \end{code}
+        \item Epsilon
+        \begin{code}
+            $\epsilon$ = {""} $\neq$ $\phi$
+        \end{code}
+        \item Union
+        \begin{code}
+            A + B = {a|a $\in$ A} $\cup$ {b|b $\in$ B}
+        \end{code}
+        \item Concatenation
+        \begin{code}
+            AB = {ab| a $\in$ A $\wedge$ b $\in$ B}
+        \end{code}
+        \item Iteration
+        \begin{code}
+            A$^*$ = $\displaystyle\bigcup_{i\geq0}$ A$^i$
+        \end{code} 
+        \begin{code}
+            e.g. A$^0$ = $\epsilon$, A$^i$ = $\underbrace{\text{A}\dots \text{A}}_{\text{i times}}$
+        \end{code}
+    \end{itemize}
+\end{cell}
+E.g. \quad $\Sigma$ = {0, 1}
+
+\begin{enumerate}
+    \item $\underbrace{\text{1}^*}_{\text{=1}^* + \text{1}}$ = $\displaystyle\bigcup_{i\geq0}$ 1$^i$ = "" + 1 + 11 + $\underbrace{\text{11} \dots \text{11}}_{\text{i times}}$ = all strings of 1's
+    \item $\underbrace{\text{(1 + 0)}1}_{\text{=11 + 01}}$ = {ab|a $\in$ 1+0 $\wedge$ b $\in$ 1} = {11, 01}
+    \item 0$^*$ + 1$^*$ = {0$^i$|$i\geq0$} $\cup$ {1$^i$|$i\geq0$}
+    \item (0 + 1)$^*$ = $\displaystyle\bigcup_{i\geq0}$ (0 + 1)$^i$ = "", (0 + 1), (0 + 1)(0 + 1), $\underbrace{\text{(0 + 1)} \dots \text{(0 + 1)}}_{\text{i times}}$ \newline = all strings of 0's and 1's\newline = $\Sigma^*$
+\end{enumerate}
+\textcolor{stanfordred}{Question}\vspace{\baselineskip}
+
+(0 + 1)$^*$1(0 + 1)$^*$, $\Sigma$ = {0, 1} $\Rightarrow$ (0 + 1)$\dots$(0 + 1)1(0 + 1)$\dots$(0 + 1)\vspace{\baselineskip}
+
+$\rightarrow$ (01 + 11)$^*$(0 + 1)$^*\quad$\xmark
+
+No guarantee of the first "(0 + 1)$^*$", like "10" is not allowed by "(01 + 11)$^*$".\vspace{\baselineskip}
+
+$\rightarrow$ (0 + 1)$^*$(10 + 11 + 1)(0 + 1)$^*\quad$\cmark 
+
+(10 + 11 + 1) guarantees the "1", $\Rightarrow$ 10 + 11 $\Leftrightarrow$ "1" + "0" or "1" + "1" = 1(1 + 0)$^*$.\vspace{\baselineskip}
+
+$\rightarrow$ (1 + 0)$^*$1(1 + 0)$^*\quad$\cmark 
+
+It's the same as (0 + 1)$^*$1(0 + 1)$^*$.\vspace{\baselineskip}
+
+$\rightarrow$ (0 + 1)$^*(0 + 1)$(0 + 1)$^*\quad$\xmark
+
+It's the same as (0 + 1)$^*$, and no guarantee the middle "1".\vspace{\baselineskip}
+
+\begin{cell}
+    \textcolor{stanfordred}{Summary}
+    \begin{enumerate}
+        \item \textcolor{stanfordred}{Regular expression}(syntax) specify \textcolor{stanfordred}{regular languages}(set of things)
+        \item Five constructs
+        \begin{enumerate}
+            \item Two base cases
+                empty and 1-character strings
+            \item Three compound expressions
+                union, concatenation, iteration
+        \end{enumerate}
+    \end{enumerate}
+\end{cell}
+ 
 \end{document}
